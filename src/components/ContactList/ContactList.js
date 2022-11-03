@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { MdOutlineDeleteForever } from 'react-icons/md';
 import { BsTelephone } from 'react-icons/bs';
 import { List, Item, Button } from './ContactList.styled';
+import { useSelector } from 'react-redux';
 
-export const ContactList = ({ contacts, onDeletContact }) => {
+export const ContactList = ({ onDeletContact }) => {
+  const contacts = useSelector(state => state.tasks);
+
   return (
     <List>
       {contacts.map(({ id, name, number }) => (

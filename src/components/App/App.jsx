@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
 
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
+import { setTextFilter } from 'redux/actions';
 
 import { AppWrapper, Title, TitleContacts } from './App.styled';
 
@@ -43,9 +45,9 @@ export const App = () => {
   const deletContact = idContact => {
     setContacts(contacts.filter(contact => contact.id !== idContact));
   };
-
+  const dispatch = useDispatch();
   const filretContacts = e => {
-    setFilterTex(e.currentTarget.value);
+    dispatch(setTextFilter(e.currentTarget.value));
   };
 
   const renderContacts = () => {
