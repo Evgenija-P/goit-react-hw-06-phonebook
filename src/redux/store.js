@@ -17,7 +17,7 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'filters/text':
       return {
-        // ...state,
+        ...state,
         tasks: state.tasks.filter(task =>
           task.name.toLowerCase().includes(state.filters.text.toLowerCase())
         ),
