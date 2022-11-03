@@ -1,36 +1,27 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { MdOutlineDeleteForever } from 'react-icons/md';
-import { BsTelephone } from 'react-icons/bs';
-import { List, Item, Button } from './ContactList.styled';
 import { useSelector } from 'react-redux';
 
-export const ContactList = ({ onDeletContact }) => {
+import { List, Item } from './ContactList.styled';
+import { Contact } from 'components/Contact/Contact';
+
+export const ContactList = () => {
   const contacts = useSelector(state => state.tasks);
+  // const filterText = useSelector(state => state.filters.text);
+
+  // const normalized = filterText.toLocaleLowerCase();
+  // const mapContacts = contacts.filter(contact =>
+  //   contact.name.toLocaleLowerCase().includes(normalized)
+  // );
+
+  console.log(contacts);
 
   return (
     <List>
       {contacts.map(({ id, name, number }) => (
         <Item key={id}>
-          <p>
-            <BsTelephone size={24} color={'blue'} /> {name}: {number}
-          </p>
-          <Button type="button" onClick={() => onDeletContact(id)}>
-            <MdOutlineDeleteForever size={24} color={'blue'} />
-          </Button>
+          <Contact id={id} name={name} number={number} />
         </Item>
       ))}
     </List>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  onDeletContact: PropTypes.func.isRequired,
 };

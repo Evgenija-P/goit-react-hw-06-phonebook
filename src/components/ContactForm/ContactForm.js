@@ -1,14 +1,20 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 
 import { Form, Label, Input, Button } from './ContactForm.styled';
+import { addContact } from 'redux/actions';
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
+  const nameId = nanoid(3);
+  const numberId = nanoid(3);
+  const contacts = useSelector(state => state.tasks);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleChangeName = e => {
     setName(e.target.value);
@@ -20,8 +26,16 @@ export const ContactForm = ({ onSubmit }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (
+      contacts.find(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
+      return alert(`${name} is already in contacts.`);
+    }
 
-    onSubmit({ name, number });
+    dispatch(addContact({ name, number }));
+
     reset();
   };
 
@@ -30,8 +44,6 @@ export const ContactForm = ({ onSubmit }) => {
     setNumber('');
   };
 
-  const nameId = nanoid(3);
-  const numberId = nanoid(3);
   return (
     <>
       <Form onSubmit={handleSubmit}>
@@ -65,8 +77,4 @@ export const ContactForm = ({ onSubmit }) => {
       </Form>
     </>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };

@@ -17,13 +17,19 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'filters/text':
       return {
-        ...state,
-        tasks: state.tasks.filter(task =>
-          task.name.toLowerCase().includes(state.filters.text.toLowerCase())
-        ),
         filters: {
           text: action.payload,
         },
+      };
+    case 'tasks/addContact':
+      return {
+        ...state,
+        tasks: [...state.tasks, action.payload],
+      };
+    case 'tasks/deleteTask':
+      return {
+        ...state,
+        tasks: state.tasks.filter(task => task.id !== action.payload),
       };
     default:
       return state;
