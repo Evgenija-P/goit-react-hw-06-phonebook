@@ -1,3 +1,3 @@
-export const getContacts = state => state.tasks;
+export const getContacts = state => state.contacts;
 
 export const getValue = state => state.filters.text;

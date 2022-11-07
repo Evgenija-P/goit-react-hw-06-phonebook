@@ -1,16 +1,15 @@
-// import { createStore } from 'redux';
-// import { devToolsEnhancer } from '@redux-devtools/extension';
 import { configureStore } from '@reduxjs/toolkit';
-// import { rootReducer } from './reducer';
-import { tasksReducer, filtersReducer } from './reducer';
+// import { combineReducers } from '@reduxjs/toolkit';
+import { contactsReducer } from './contactsSlice';
+import { filtersReducer } from './filtersSlice';
+// import { addContact, deletContact } from './contactsSlice';
+// import { setTextFilter } from './filtersSlice';
 
-// const initialState = {
-//   tasks: tasksReducer,
+// const rootReducer = combineReducers({
+//   contacts: contactsReducer,
 //   filters: filtersReducer,
-// };
+// });
 
-// const enhancer = devToolsEnhancer();
-// export const store = createStore(rootReducer, enhancer);
 export const store = configureStore({
-  reducer: { tasks: tasksReducer, filters: filtersReducer },
+  reducer: { contacts: contactsReducer, filters: filtersReducer },
 });

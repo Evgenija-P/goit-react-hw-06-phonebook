@@ -3,22 +3,16 @@ import { useSelector } from 'react-redux';
 
 import { List, Item } from './ContactList.styled';
 import { Contact } from 'components/Contact/Contact';
-import { getContacts } from 'redux/selectors';
+import { getContacts, getValue } from 'redux/selectors';
 
 export const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  // const filterText = useSelector(state => state.filters.text);
+  const contactsState = useSelector(getContacts);
+  const filter = useSelector(getValue);
 
-  // const normalized = filterText.toLocaleLowerCase();
-  // const mapContacts = contacts.filter(contact =>
-  //   contact.name.toLocaleLowerCase().includes(normalized)
-  // );
-
-  // const mapContacts = contacts.filter(contact =>
-  //   contact.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())
-  // );
-
-  console.log(contacts);
+  const normalized = filter.toLocaleLowerCase();
+  const contacts = contactsState.filter(contact =>
+    contact.name.toLocaleLowerCase().includes(normalized)
+  );
 
   return (
     <List>

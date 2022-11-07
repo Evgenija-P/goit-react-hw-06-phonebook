@@ -1,5 +1,5 @@
 import React from 'react';
-import { setTextFilter } from 'redux/actions';
+import { setTextFilter } from 'redux/filtersSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 // import PropTypes from 'prop-types';
@@ -30,9 +30,4 @@ export const Filter = () => {
       />
     </Label>
   );
-};
-
-Filter.propTypes = {
-  // value: PropTypes.string.isRequired,
-  // onFilretContacts: PropTypes.func.isRequired,
 };

@@ -5,20 +5,20 @@ import { nanoid } from 'nanoid';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 
 import { Form, Label, Input, Button } from './ContactForm.styled';
-import { addContact } from 'redux/actions';
+import { addContact } from 'redux/contactsSlice';
 import { getContacts } from 'redux/selectors';
 
 export const ContactForm = () => {
   const nameId = nanoid(3);
   const numberId = nanoid(3);
   const contacts = useSelector(getContacts);
-  const [name, setName] = useState('');
+  const [nameForm, setNameForm] = useState('');
   const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
 
   const handleChangeName = e => {
-    setName(e.target.value);
+    setNameForm(e.target.value);
   };
 
   const handleChangeNumber = e => {
@@ -29,19 +29,19 @@ export const ContactForm = () => {
     e.preventDefault();
     if (
       contacts.find(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
+        contact => contact.name.toLowerCase() === nameForm.toLowerCase()
       )
     ) {
-      return alert(`${name} is already in contacts.`);
+      return alert(`${nameForm} is already in contacts.`);
     }
 
-    dispatch(addContact({ name, number }));
+    dispatch(addContact({ nameForm, number }));
 
     reset();
   };
 
   const reset = () => {
-    setName('');
+    setNameForm('');
     setNumber('');
   };
 
@@ -52,7 +52,7 @@ export const ContactForm = () => {
         <Input
           type="text"
           name="name"
-          value={name}
+          value={nameForm}
           id={nameId}
           placeholder="Name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
