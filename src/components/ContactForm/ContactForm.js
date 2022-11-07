@@ -6,11 +6,12 @@ import { AiOutlineUserAdd } from 'react-icons/ai';
 
 import { Form, Label, Input, Button } from './ContactForm.styled';
 import { addContact } from 'redux/actions';
+import { getContacts } from 'redux/selectors';
 
 export const ContactForm = () => {
   const nameId = nanoid(3);
   const numberId = nanoid(3);
-  const contacts = useSelector(state => state.tasks);
+  const contacts = useSelector(getContacts);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
